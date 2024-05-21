@@ -24,5 +24,13 @@ jobs:
 
 
 
-      - name: AWS CD
-        run: pwd
+      - name: deploy packaging
+        run: |
+          mkdir deploy
+          cp build/libs/*jar deploy/applications.jar
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cd deploy && zip -r deploy.zip .
+
+      - name: list
+        run: ls
